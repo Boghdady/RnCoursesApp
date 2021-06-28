@@ -1,0 +1,12 @@
+{
+  "name": "RnModernApp",
+  "displayName": "RnModernApp",
+  "expo": {
+    "name": "RnModernApp",
+    "slug": "RnModernApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
