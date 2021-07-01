@@ -19,11 +19,16 @@ const styles = ScaledSheet.create({
     padding: 24,
     alignSelf: "baseline",
     borderRadius: 14,
-    marginRight: 16,
 
-    borderColor: "#ccc",
-    borderWidth: 0.5,
-    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
   image: {
     width: "32@s",

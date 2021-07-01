@@ -3,8 +3,10 @@ import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 import { ScaledSheet } from "react-native-size-matters";
 import Logo from "../components/home/Logo";
 import Card from "../components/home/Card";
+import CourseCard from "../components/home/CourseCard";
+import Menu from "../components/Menu/Menu";
 
-import { courses, logos } from "../components/home/data";
+import { courses, coursesData, logos } from "../components/home/data";
 import { NotificationIcon } from "../components/home/Icons";
 
 function TitleBarSection() {
@@ -20,30 +22,6 @@ function TitleBarSection() {
   );
 }
 
-function ContinueLearningSection() {
-  return (
-    <View>
-      <Text style={styles.learningSectionTitle}>Continue Learning</Text>
-      <ScrollView
-        style={styles.scrollView}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      >
-        {courses.map((course) => (
-          <Card
-            key={course.id}
-            title={course.title}
-            image={course.image}
-            logo={course.logo}
-            caption={course.caption}
-            subtitle={course.subtitle}
-          />
-        ))}
-      </ScrollView>
-    </View>
-  );
-}
-
 function LogosSection() {
   return (
     <ScrollView
@@ -51,21 +29,87 @@ function LogosSection() {
       horizontal
       showsHorizontalScrollIndicator={false}
     >
-      {logos.map((logo, index) => (
-        <Logo key={index} logo={logo.logo} text={logo.text} />
+      {logos.map((logo) => (
+        <View key={logo.id} style={styles.logosWrapper}>
+          <Logo logo={logo.image} text={logo.text} />
+        </View>
       ))}
     </ScrollView>
   );
 }
 
+function ContinueLearningSection() {
+  return (
+    <>
+      <Text style={styles.sectionsTitle}>Continue Learning</Text>
+      <Separator />
+      <ScrollView
+        style={styles.learningsWrapper}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
+        {courses.map((course) => (
+          <View key={course.id} style={styles.logosSection}>
+            <Card
+              title={course.title}
+              image={course.image}
+              logo={course.logo}
+              caption={course.caption}
+              subtitle={course.subtitle}
+            />
+          </View>
+        ))}
+      </ScrollView>
+    </>
+  );
+}
+
+function PopularCourse() {
+  return (
+    <>
+      <Text style={styles.sectionsTitle}>Popular Courses</Text>
+      <Separator />
+      <ScrollView
+        style={{ paddingLeft: 20 }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      >
+        {coursesData.map((course) => (
+          <View key={course.id} style={styles.coursesWrapper}>
+            <CourseCard
+              title={course.title}
+              subtitle={course.subtitle}
+              image={course.image}
+              logo={course.logo}
+              author={course.author}
+              avatar={course.avatar}
+              caption={course.caption}
+            />
+          </View>
+        ))}
+      </ScrollView>
+    </>
+  );
+}
+
+function Separator() {
+  return <View style={styles.separator} />;
+}
+
 export default function Home(props) {
   return (
     <View style={styles.container}>
+      <Menu />
       <SafeAreaView>
         <ScrollView>
           <TitleBarSection />
+          <Separator />
           <LogosSection />
+          <Separator />
           <ContinueLearningSection />
+          <Separator />
+          <PopularCourse />
+          <Separator />
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -102,25 +146,38 @@ const styles = ScaledSheet.create({
   },
 
   logosSection: {
-    marginLeft: 20,
-    marginTop: 30,
+    paddingBottom: 5,
   },
-  learningSectionTitle: {
-    color: "#b8bece",
-    fontWeight: "600",
-    fontSize: "15@s",
-    marginLeft: 20,
-    marginTop: 30,
-    marginBottom: 20,
-    textTransform: "uppercase",
-  },
+  logosWrapper: { paddingLeft: 20 },
   notificationIcon: {
     position: "absolute",
     right: 20,
     top: 5,
   },
 
-  scrollView: {
+  sectionsTitle: {
+    color: "#b8bece",
+    fontWeight: "600",
+    fontSize: "15@s",
     marginLeft: 20,
+    // marginTop: 20,
+    // marginBottom: 20,
+    textTransform: "uppercase",
+  },
+
+  learningsWrapper: {
+    paddingLeft: 20,
+  },
+
+  coursesSection: {
+    paddingRight: 20,
+    paddingLeft: 20,
+    // paddingBottom: 20,
+  },
+  coursesWrapper: { paddingBottom: 5 },
+
+  separator: {
+    width: "100%",
+    height: 20,
   },
 });

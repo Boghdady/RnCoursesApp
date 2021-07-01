@@ -26,17 +26,25 @@ const styles = ScaledSheet.create({
     width: "295@s",
     height: "280@s",
     borderRadius: 14,
-    overflow: "hidden",
-    marginRight: 20,
-    marginBottom: 20,
 
-    borderColor: "#ccc",
-    borderWidth: 0.5,
-    elevation: 4,
+    marginRight: 20,
+    // marginBottom: 20,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
   cardImage: {
     width: "100%",
     height: "70%",
+    borderTopRightRadius: 14,
+    borderTopLeftRadius: 14,
   },
   cardTitle: {
     fontSize: "24@s",
